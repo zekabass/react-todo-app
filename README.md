@@ -1,5 +1,10 @@
 # react-todo-app
-Small and Simple To do app amde with create-react-app and bulma css framework.
+Small and Simple To do app made with create-react-app and bulma css framework.
+
+https://github.com/facebook/create-react-app ,
+https://bulma.io/ ,
+https://fontawesome.com/
+
 
 ## Getting Started
 
