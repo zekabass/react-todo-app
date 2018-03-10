@@ -1,0 +1,92 @@
+@import "variables";
+@import "~bulma/bulma";
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    background: #00BCA0;
+}
+
+.title {
+    color: #383838;
+}
+
+.title.is-primary {
+    color: $primary;
+}
+
+.fa-trash-alt {
+    color: $primary !important;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.task {
+    margin-bottom: 25px;
+    padding: 0px 20px;
+}
+
+.task-name {
+    word-break: break-word;
+}
+
+.task-list.card-content {
+    padding: 3rem 1.5rem;
+}
+
+.boxed {
+    border:1px solid #dbdbdb;
+    border-radius:5px;
+    margin-left: 5px;
+    max-height: 50px;
+}
+
+.checked {
+    color: #c9c9c9;
+    text-decoration: line-through;
+}
+
+.card-footer {
+    background: #f2f2f2;
+}
+
+.editing-field {
+    padding: 9px 2px;
+}
+
+.edit-input {
+    max-height: 30px;
+}
+
+.modal-card-foot {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.modal-card-head {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+@media only screen and (max-width: 768px) {
+    .task-list.card-content {
+        padding: 3rem 0rem;
+    }
+
+    .section {
+        padding:3rem 0.7rem;
+    }
+
+    .to-do-list {
+        padding:0px 0.7rem;
+    }
+    
+    .logo-icon {
+        width:40px;
+    }
+}
