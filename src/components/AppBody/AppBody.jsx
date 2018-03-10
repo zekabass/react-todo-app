@@ -18,7 +18,8 @@ class AppBody extends Component {
 			toDoList		: 	[],
 			taskName		:	'',
 			modalOpened		:	false,
-			checkedHidden 	: 	false
+			checkedHidden 	: 	false,
+			numOfChecked 	: 	0
 		};	
 	}
 
@@ -37,7 +38,7 @@ class AppBody extends Component {
 	 */
 	getTaskPostion(taskId) {
 		return this.state.toDoList.findIndex((task)=>{
-			return taskId === task.idč
+			return taskId === task.id;
 		})
 	}
 
@@ -106,10 +107,15 @@ class AppBody extends Component {
 		/* Getting position of passed task in array */
 		let itemPos = this.getTaskPostion(task.id);
 
+		if(task.checked) {
+			/* Update the number of the checked tasks */
+			this.updateCheckedTasks(true);
+		}
+
 		/* Removing task from the array */
 		newTaskList.splice(itemPos, 1);
 
-		this.setState({ toDoList: newTaskList });
+		this.setState({ toDoList: newTaskList });	
 	}
 
 	/**
@@ -132,10 +138,32 @@ class AppBody extends Component {
 	}
 
 	/**
+	 * Update the number of checked tasks
+	 * @param {Boolean} checkedIsDeleted 
+	 */
+	updateCheckedTasks(checkedIsDeleted) {
+		/* If checked task is deleting sub number of checked by one */
+		if(checkedIsDeleted) {
+			let numOf = this.state.numOfChecked;
+			if(numOf > 0) {
+				numOf -= 1;
+			}
+			this.setState({ numOfChecked: numOf });
+		} else {
+			/* Filter tasks and get number of checked items */
+			let getChecked = this.state.toDoList.filter((task)=>{ return task.checked});
+			this.setState({ numOfChecked: getChecked.length });
+		}
+	}
+
+	/**
 	 * Deleting all tasks from the state
 	 */
 	deleteAll() {
 		this.setState({ toDoList: [] });
+		
+		/* Reset the number of the checked tasks */
+		this.setState({ numOfChecked: 0 });
 	}
 
 	/**
@@ -185,6 +213,9 @@ class AppBody extends Component {
 
 			this.setState({ toDoList: newTaskList });
 		}
+
+		/* Update the number of the checked tasks */
+		this.updateCheckedTasks();
 	}
 
 	/**
@@ -211,6 +242,15 @@ class AppBody extends Component {
 									onInput		=	{ (e) => { this.onTaskInput(e) } } 
 									taskName	=	{ this.state.taskName } 			
 								/>
+
+								{/* Showing number of checked tasks and the number of all inputs */}
+								{ this.state.toDoList.length > 0 &&	
+									<div className="columns">
+										<div className="column has-text-centered">
+											<h1 className="title is-7">Checked tasks: {this.state.numOfChecked} / {this.state.toDoList.length}</h1>
+										</div>
+									</div>
+								}
 
 								{/* Component that lists all tasks*/}
 								<TaskList 
